@@ -19,12 +19,14 @@ params = {
     "apikey": os.environ.get("ALPHA_API_KEY"),
 }
 res = requests.get(STOCK_ENDPOINT, params=params)
+res.raise_for_status()
 data = res.json()["Time Series (Daily)"]
 data_list = [value for (key, value) in data.items()]
 current = float(data_list[0]["4. close"])
 previous = float(data_list[1]["4. close"])
 diff = abs(current - previous)
 percent = (diff / current) * 100
+
 direction = ""
 
 if current > previous:
