@@ -43,7 +43,8 @@ if percent > 1.5:
     articles = res.json()["articles"]
     top_3 = articles[:3]
 
-    news_list = [f"{STOCK_NAME} {direction} {round(percent, 1)}% \nHeadline: {article['title']}. \nBrief: {article['description']}" for article in top_3]
+    news_list = [f"{STOCK_NAME} {direction} {round(percent, 1)}% \nHeadline: {article['title']}. \nBrief:" /
+                 "{article['description']}" for article in top_3]
 
     client = Client(twilio_account_sid, twilio_auth_token)
 
@@ -55,5 +56,3 @@ if percent > 1.5:
         )
 
         print(message.status)
-
-
